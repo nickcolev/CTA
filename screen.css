@@ -1,1 +1,26 @@
-body    { font-family: sans-serif; }
+@font-face {
+	font-family: "liberation";
+	src: url('/css/LiberationSans-Regular-webfont.eot');
+	src: url('/css/LiberationSans-Regular-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "liberation";
+	src: url('/css/LiberationSans-Bold-webfont.eot');
+	src: url('/css/LiberationSans-Bold-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+a	{ color: #ff9; text-decoration: none; }
+a:hover	{ text-decoration: underline; }
+body	{ background-color: #020; color: #ffb; font-family: liberation,sans-serif; font-size: 1.1em; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin-right: 2mm; }
+small	{ font-size: 9pt; font-weight: normal; }
+td	{ vertical-align: top; font-size: 1.2em; }
+dl.rss	{ margin-right: 1em; }
+dt.rss	{ font-size: 1.1em; font-weight: bold; }
+dd.rss	{ font-size: 0.93em; padding-bottom: 1em; }
+input	{ font-family: liberation; font-size: 11pt; border-radius: 2px; }
+.click	{ cursor: pointer; }
+.tiny	{ font-size: 8pt; font-weight: normal; }
+.fitw   { width: 100%; }

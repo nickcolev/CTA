@@ -1,0 +1,60 @@
+<html><head><title>Calculator</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+<link rel="stylesheet" type="text/css" href="screen.css"/>
+<script type="text/javascript">
+var m = 0;
+function bt (o) {
+  var c = o.innerHTML ? o.innerHTML : o;
+  document.data.view.value += c;
+}
+function ca () {
+  var o = document.data.view;
+  if (o.value) {
+    try {
+      o.value = eval (o.value);
+    } catch (e) { alert ("Bad expression"); }
+  }
+  return false;
+}
+function ce () {
+  var l = document.data.view.value.length;
+  if (l > 0) document.data.view.value = document.data.view.value.substr (0, --l);
+}
+function ma (s) {
+  if (!s) s = '+';
+  ca ();
+  var f = parseFloat (document.data.view.value);
+  // Do validity chk here
+  if (s == '-') f = f * (-1);
+  m += f;
+  var o = document.getElementById ('m');
+  o.style.color = "#FF0000";
+  o.title = m;
+}
+function mc () {
+  m = 0;
+  var o = document.getElementById ('m');
+  o.style.color = '';
+  o.title = m;
+}
+function mp () {
+  bt (m);
+}
+</script>
+<style type="text/css">
+td	{ font-size: 14pt; text-align: center; }
+</style>
+</head>
+<body>
+
+<form name="data" onsubmit="return ca()">
+ <table align="center" border=3 cellpadding=8 cellspacing=0 height="98%" width="98%">
+  <tr><td id="m" class="click" onclick="mp()" title="">M</td><td colspan=3><input name="view" style="text-align:right;width:100%;" onfocus="this.select()"/></td><td class="click" onclick="ce()" title="Clear">C</td></tr>
+  <tr><td class="click" onclick="ma('+')" title="Add to Memory"><small>M+</small></td><td class="click" onclick="bt(this)">7</td><td class="click" onclick="bt(this)">8</td><td class="click" onclick="bt(this)">9</td><td class="click" onclick="bt(this)">+</td></tr>
+  <tr><td class="click" onclick="ma('-')" title="Substract from Memory"><small>M-</small></td></td><td class="click" onclick="bt(this)">4</td><td class="click" onclick="bt(this)">5</td><td class="click" onclick="bt(this)">6</td><td class="click" onclick="bt(this)">-</td></tr>
+  <tr><td class="click" onclick="mc()" title="Clear Memory"><small>MC</small></td><td class="click" onclick="bt(this)">1</td><td class="click" onclick="bt(this)">2</td><td class="click" onclick="bt(this)">3</td><td class="click" onclick="bt(this)">*</td></tr>
+  <tr><td>&nbsp;</td><td class="click" onclick="bt(this)">0</td><td class="click" onclick="bt(this)">.</td><td class="click" onclick="ca()">=</td><td class="click" onclick="bt(this)">/</td></tr>
+ </table>
+</form>
+
+</body></html>

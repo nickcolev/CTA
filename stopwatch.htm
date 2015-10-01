@@ -1,0 +1,71 @@
+<HTML><HEAD><TITLE>StopWatch</TITLE>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+<script type="text/javascript">
+var t, t1, t2, o, run = false, ms = 0;
+function about () {
+  alert ("(c) vera5.com, 2011");
+}
+function ctrl () {
+  if (run)
+    stop ();
+  else
+    start ();
+}
+function init () {
+  o = document.getElementById ('t');
+}
+function pad2 (n) {
+  return (n < 10 ? '0' : '') + n;
+}
+function reset () {
+  stop ();
+  ms = 0;
+  o.innerHTML = "00:00:00";
+}
+function tick () {
+  t2 = new Date ();
+  var dx = ms + t2.getTime () - t1.getTime ();
+  var dd = Math.floor (dx/1000/60/60/24);
+  dx -= dd * 1000*60*60*24;
+  var hh = Math.floor (dx/1000/60/60);
+  dx -= hh * 1000*60*60;
+  var mm = Math.floor (dx/1000/60);
+  dx -= mm * 1000*60;
+  var ss = Math.floor (dx/1000);
+  o.innerHTML = pad2 (hh) + ':' + pad2 (mm) + ':' + pad2 (ss);
+}
+function stop () {
+  clearInterval (t);
+  ms += t2.getTime () - t1.getTime ();
+  o.title = "Start";
+  o.style.color = "";
+  run = false;
+}
+function start () {
+  t1 = new Date ();
+  t = setInterval ("tick()", 500);
+  o.title = "Stop";
+  o.style.color = "#ffa";
+  run = true;
+}
+</script>
+<link rel="stylesheet" type="text/css" href="screen.css"/>
+<style type="text/css">
+a	{ text-decoration: none; color: #ffffaa; }
+td	{ font-size: 8pt; text-align: center; }
+#t	{ font-size: 36pt; font-weight: bold; color: #FFFFFF; cursor: pointer; }
+</style>
+</HEAD>
+<BODY onload="init()">
+
+<table height="100%" width="100%">
+ <tr><td colspan=3>&nbsp;</td></tr>
+ <tr height="5%">
+  <td width="35%"><a href="javascript:reset()" title="Click to reset">|||||||</a></td>
+  <td align="center" width="30%" id="t" onclick="ctrl()" title="Click to Start">00:00:00</td>
+  <td width="35%"><a href="javascript:about()" title="About">&copy;</a></td>
+ </tr>
+ <tr><td colspan=3>&nbsp;</td></tr>
+</table>
+
+</BODY></HTML>

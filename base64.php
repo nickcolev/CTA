@@ -1,6 +1,6 @@
 <?php
 /*
-*	Title:	md5 encoder
+*	Title:	base64 encoder
 *	Created:	2012-11-11
 *	Author:	Nick Kolev (nickcolev@gmail.com)
 *	License:	AGPL
@@ -12,8 +12,8 @@ function form () {
 
 	echo <<< HTML
 <center>
-<form>
- <input type="text" name="s" title="token"/>
+<form enctype="multipart/form-data" method="post">
+ <input type="file" name="f"/>
  <input type="submit" value=" OK "/>
 </form>
 </center>
@@ -21,9 +21,9 @@ HTML;
 }
 
 
-	htmlHeader ('MD5');
-	if ($_GET[s])
-		echo '<pre><span title="token">'.$_GET[s].'</span> =&gt; <span title="MD5">'.md5 ($_GET[s]).'</span></pre>';
+	htmlHeader ('base64');
+	if ($_FILES[f])
+		echo '<pre>'.chunk_split (base64_encode (join ('', file ($_FILES[f][tmp_name])))).'</pre>';
 	else
 		form ();
 ?>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><title>HTML5 Oscilator Demo</title>
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1"/>
+<meta name="keywords" content="tone, generator, HTML5, oscilator" />
+<link href="screen.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var osc;
+var contextClass = (
+    window.AudioContext ||
+    window.webkitAudioContext ||
+    window.mozAudioContext ||
+    window.oAudioContext ||
+    window.msAudioContext
+);
+if(contextClass) {
+    var ctx = new contextClass();
+    console.log(ctx);
+} else {
+    alert("Browser does not support AudioContext");
+    history.go(-1);
+}
+function ctrl() {
+    if(document.data.btn.value === " Start ") {
+        osc = ctx.createOscillator();
+        osc.type = document.data.type.value;
+        osc.frequency.value = document.data.freq.value;
+        osc.start(0);
+        osc.connect(ctx.destination);
+        document.data.btn.value = " Stop ";
+    } else {
+        osc.stop(0);
+        document.data.btn.value = " Start ";
+    }
+}
+</script>
+</head>
+<body>
+
+<h1>HTML5 Oscilator<br/><small>based on <a href="http://middleearmedia.com/web-audio-api-oscillators/">this</a> and <a href="http://flippinawesome.org/2014/03/31/creating-sound-with-the-web-audio-api-and-oscillators/">this</a> guide</small></h1>
+
+<form name="data">
+ <table align="center">
+  <tr><td>Freq.:</td><td><input name="freq" value="528"/></td></tr>
+  <tr><td>Type:</td><td><select name="type"><option>sine</option><option>square</option><option>sawtooth</option><option>triangle</option></select></td></tr>
+  <tr><td>&nbsp;</td><td><input name="btn" type="button" value=" Start " onclick="ctrl()"/></td></tr>
+ </table>
+</form>
+
+</body></html>

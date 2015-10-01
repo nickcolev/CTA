@@ -1,0 +1,36 @@
+<html><head><title>Times</title>
+<meta name="viewport" content="height=device-height,width=device-width"/>
+<link href="screen.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript">
+var ts2tm = false;
+function trans() {
+	var ts = document.getElementById("ts"),
+		tm = document.getElementById("tm");
+	console.log("trans()", ts2tm);
+	var d = new Date();
+	if (ts2tm) {
+		d.setTime(ts.value);
+		tm.value = d.toString();
+	} else {
+		d.setTime(Date.parse(tm.value));
+		ts.value = d.getTime();
+	}
+}
+function tmChange() {
+	ts2tm = false;
+}
+function tsChange() {
+	ts2tm = true;
+}
+</script>
+</head>
+<body>
+
+<h1>TimeStamp to Time</h1>
+
+<table align="center">
+ <tr><td>Timestamp</td><td>&nbsp;</td><td>Time</td></tr>
+ <tr><td><input id="ts" onchange="tsChange()"/></td><td><button onclick="trans()">Calc</button><td><input id="tm" onchange="tmChange()" value="2015-08-15"/></td></tr>
+</table>
+
+</body></html>
